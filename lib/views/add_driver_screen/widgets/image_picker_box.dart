@@ -9,8 +9,8 @@ class ImagePickerBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addVehicleProvider =
-        Provider.of<AddVehicleProvider>(context, listen: false);
-    final addVehicleProviderwatch = context.watch<AddVehicleProvider>();
+        Provider.of<AddAndGetVehicleDetails>(context, listen: false);
+    final addVehicleProviderwatch = context.watch<AddAndGetVehicleDetails>();
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -61,7 +61,7 @@ class ImagePickerBoxWidget extends StatelessWidget {
 
   Future<Widget?> bottomSheet(BuildContext context) async {
     final addVehicleProvider =
-        Provider.of<AddVehicleProvider>(context, listen: false);
+        Provider.of<AddAndGetVehicleDetails>(context, listen: false);
     return await showModalBottomSheet(
       backgroundColor: Colors.black,
       // barrierColor: Colors.blue,

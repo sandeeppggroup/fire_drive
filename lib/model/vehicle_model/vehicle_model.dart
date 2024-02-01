@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+// This is the model class for the vehicle details
 class VechileModel {
-  // String id;
   String image;
   String color;
   String model;
@@ -9,7 +9,6 @@ class VechileModel {
   String manufactureYear;
 
   VechileModel({
-    //  required this.id,
     required this.image,
     required this.color,
     required this.model,

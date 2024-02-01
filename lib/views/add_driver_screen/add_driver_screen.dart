@@ -15,11 +15,9 @@ class AddDriverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addVehicleProvider =
-        Provider.of<AddVehicleProvider>(context, listen: false);
-    // final addVehicleProviderwatch = context.watch<AddVehicleProvider>();
+        Provider.of<AddAndGetVehicleDetails>(context, listen: false);
 
     double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

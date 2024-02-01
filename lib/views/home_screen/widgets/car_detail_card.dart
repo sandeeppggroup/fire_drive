@@ -1,4 +1,5 @@
 import 'package:fire_drive/controller/add_Vehicle/provider/add_vehicle_provider.dart';
+import 'package:fire_drive/model/vehicle_model/vehicle_model.dart';
 import 'package:fire_drive/views/vehicle_detail_screen/vehicle_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,50 +11,60 @@ class CarDetailCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
-        stream: Provider.of<AddVehicleProvider>(context).getData(),
+        stream: Provider.of<AddAndGetVehicleDetails>(context).getData(),
         builder: (context, snapshot) {
-          // final vechile = snapshot[];
-          return ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const VehicleDetailScreen(),
-                        ));
-                  },
-                  child: Card(
-                    child: ListTile(
-                      title: const Text('Model : Maruthi Suzuki',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.w500)),
-                      subtitle: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Color: Grey',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 99, 97, 97)),
-                          ),
-                          Text('Wheel Type: Allow weel',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 99, 97, 97))),
-                          Text('Manufacturing Year: 2020',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 99, 97, 97))),
-                        ],
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No vechiles available.'));
+          } else {
+            List<VechileModel> vehicles = snapshot.data!;
+            return ListView.builder(
+              itemCount: vehicles.length,
+              itemBuilder: (context, index) {
+                VechileModel vehicle = vehicles[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const VehicleDetailScreen(),
+                          ));
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text('Model :${vehicle.model}',
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w500)),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Color: ${vehicle.color}',
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 99, 97, 97)),
+                            ),
+                            Text('Wheel Type: ${vehicle.wheelType}',
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 99, 97, 97))),
+                            Text(
+                                'Manufacturing Year: ${vehicle.manufactureYear}',
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 99, 97, 97))),
+                          ],
+                        ),
+                        trailing: Image.network(vehicle.image),
                       ),
-                      trailing: Image.asset('assets/images/swift.png'),
                     ),
                   ),
-                ),
-              );
-            },
-          );
+                );
+              },
+            );
+          }
         },
       ),
     );
