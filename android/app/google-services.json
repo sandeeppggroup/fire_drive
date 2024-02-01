@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1040930402944",
+    "project_id": "fire-drive-69a2f",
+    "storage_bucket": "fire-drive-69a2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040930402944:android:1a248d3c5d8a93f813ec65",
+        "android_client_info": {
+          "package_name": "com.example.fire_drive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy_WKDxsVFbqTVCeRpWhUPennUT_rUmxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
