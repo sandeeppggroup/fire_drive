@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables, file_names
+
 import 'package:fire_drive/views/widgets/shadow.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreenImageBoxWidget extends StatelessWidget {
-  const DetailScreenImageBoxWidget({super.key});
+  final image;
+  DetailScreenImageBoxWidget({this.image, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +29,8 @@ class DetailScreenImageBoxWidget extends StatelessWidget {
                   child: SizedBox(
                     height: 290,
                     width: 370,
-                    child: Image.asset(
-                      'assets/images/polo_red.png',
+                    child: Image.network(
+                      image,
                       fit: BoxFit.fill,
                     ),
                   ),

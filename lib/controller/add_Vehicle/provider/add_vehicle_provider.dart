@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, non_constant_identifier_names, avoid_function_literals_in_foreach_calls
 
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -46,6 +46,19 @@ class AddAndGetVehicleDetails extends ChangeNotifier {
 
   // This function is using for add vehicle details to firestore
   Future<void> addFirestore(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color.fromARGB(255, 208, 23, 10),
+            color: Colors.amber,
+            strokeWidth: 6,
+            strokeAlign: 3,
+          ),
+        );
+      },
+    );
     String Url = await storeFile(_selectedimage!);
     var data = VechileModel(
       image: Url,
@@ -56,10 +69,27 @@ class AddAndGetVehicleDetails extends ChangeNotifier {
     );
     try {
       await firestore.collection('vehicles').doc().set(data.toMap());
-      Fluttertoast.showToast(msg: "Data added successfully");
+      Fluttertoast.showToast(
+        msg: "Data added successfully",
+        backgroundColor: Colors.green,
+        fontSize: 20,
+        toastLength: Toast.LENGTH_LONG,
+      );
+      modelController.clear();
+      colorController.clear();
+      whealTypeController.clear();
+      manufacturingYearController.clear();
+      _selectedimage?.delete();
+      Navigator.pop(context);
       Navigator.pop(context);
     } catch (e) {
-      Fluttertoast.showToast(msg: 'something went wrong');
+      Fluttertoast.showToast(
+        msg: 'something went wrong',
+        backgroundColor: Colors.red,
+        fontSize: 20,
+        toastLength: Toast.LENGTH_LONG,
+      );
+      Navigator.pop(context);
       return;
     }
   }

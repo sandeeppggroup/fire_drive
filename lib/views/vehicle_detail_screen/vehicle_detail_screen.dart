@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_constructors_in_immutables
 
 import 'package:fire_drive/views/vehicle_detail_screen/widgets/detail_Screen_image_box.dart';
 import 'package:fire_drive/views/widgets/custom_appbar_second.dart';
@@ -11,7 +11,7 @@ class VehicleDetailScreen extends StatelessWidget {
   final wheelType;
   final manifacturingYear;
 
-  const VehicleDetailScreen(
+  VehicleDetailScreen(
       {this.image,
       this.model,
       this.color,
@@ -37,7 +37,9 @@ class VehicleDetailScreen extends StatelessWidget {
             ),
           ),
           const Divider(),
-          const DetailScreenImageBoxWidget(),
+          DetailScreenImageBoxWidget(
+            image: image,
+          ),
           const Divider(),
           const SizedBox(
             height: 20,
@@ -84,19 +86,19 @@ class VehicleDetailScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(':  Polo Highline petrol', style: style),
+                    Text(':  $model', style: style),
                     SizedBox(
                       height: textHeight,
                     ),
-                    Text(':  Red', style: style),
+                    Text(':  $color', style: style),
                     SizedBox(
                       height: textHeight,
                     ),
-                    Text(':  Allow wheel', style: style),
+                    Text(':  $wheelType', style: style),
                     SizedBox(
                       height: textHeight,
                     ),
-                    Text(':  2013', style: style),
+                    Text(':  $manifacturingYear', style: style),
                   ],
                 ),
               ],

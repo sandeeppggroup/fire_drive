@@ -88,9 +88,22 @@ class AddDriverScreen extends StatelessWidget {
                     height: height * 0.04,
                   ),
                   CustomButton(
-                    label: 'Save Product',
+                    label: 'Save',
                     onPressed: () async {
                       addVehicleProvider.addFirestore(context);
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Color.fromARGB(255, 208, 23, 10),
+                              color: Colors.amber,
+                              strokeWidth: 6,
+                              strokeAlign: 3,
+                            ),
+                          );
+                        },
+                      );
                     },
                   ),
                 ],
