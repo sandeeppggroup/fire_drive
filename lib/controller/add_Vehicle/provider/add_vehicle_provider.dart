@@ -1,6 +1,12 @@
-import 'dart:io';
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fire_drive/model/vehicle_model/vehicle_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddVehicleProvider extends ChangeNotifier {
@@ -12,6 +18,9 @@ class AddVehicleProvider extends ChangeNotifier {
 
   File? get image => _selectedimage;
 
+  final firestore = FirebaseFirestore.instance;
+  final firestorage = FirebaseStorage.instance;
+
   void setImage(File image) {
     _selectedimage = image;
     notifyListeners();
@@ -22,4 +31,35 @@ class AddVehicleProvider extends ChangeNotifier {
     if (image == null) return;
     setImage(File(image.path));
   }
+
+  Future<String> storeFile(File image) async {
+    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference ref = firestorage.ref().child('images').child(timestamp);
+
+    UploadTask uploadTask = ref.putFile(image);
+    TaskSnapshot snap = await uploadTask;
+    String downloadUrl = await snap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<void> addFirestore(BuildContext context) async {
+    String Url = await storeFile(_selectedimage!);
+    var data = VechileModel(
+      image: Url,
+      color: colorController.text,
+      model: modelController.text,
+      wheelType: whealTypeController.text,
+      manufactureYear: manufacturingYearController.text,
+    );
+    try {
+      await firestore.collection('vechicles').doc().set(data.toMap());
+      Fluttertoast.showToast(msg: "Data added successfully");
+      Navigator.pop(context);
+    } catch (e) {
+      Fluttertoast.showToast(msg: 'something went wrong');
+      return;
+    }
+  }
+
+  Stream<List> getData() async* {}
 }

@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:fire_drive/views/add_driver_screen/widgets/image_picker_box.dart';
 import 'package:fire_drive/views/vehicle_detail_screen/widgets/detail_Screen_image_box.dart';
 import 'package:fire_drive/views/widgets/custom_appbar_second.dart';
-import 'package:fire_drive/views/widgets/shadow.dart';
 import 'package:flutter/material.dart';
 
 class VehicleDetailScreen extends StatelessWidget {
@@ -24,7 +22,7 @@ class VehicleDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+
     double textHeight = height * 0.07;
     TextStyle style =
         const TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
@@ -39,7 +37,7 @@ class VehicleDetailScreen extends StatelessWidget {
             ),
           ),
           const Divider(),
-          const DetailScreenImageBox(),
+          const DetailScreenImageBoxWidget(),
           const Divider(),
           const SizedBox(
             height: 20,

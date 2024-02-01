@@ -1,8 +1,8 @@
 import 'package:fire_drive/views/widgets/shadow.dart';
 import 'package:flutter/material.dart';
 
-class DetailScreenImageBox extends StatelessWidget {
-  const DetailScreenImageBox({super.key});
+class DetailScreenImageBoxWidget extends StatelessWidget {
+  const DetailScreenImageBoxWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

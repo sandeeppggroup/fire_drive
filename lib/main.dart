@@ -1,7 +1,7 @@
 import 'package:fire_drive/controller/add_Vehicle/provider/add_vehicle_provider.dart';
 import 'package:fire_drive/firebase_options.dart';
 import 'package:fire_drive/views/add_driver_screen/add_driver_screen.dart';
-import 'package:fire_drive/views/home_screen/hoem_screen.dart';
+import 'package:fire_drive/views/home_screen/home_screen.dart';
 import 'package:fire_drive/views/vehicle_detail_screen/vehicle_detail_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
